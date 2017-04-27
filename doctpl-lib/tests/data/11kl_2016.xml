@@ -1,0 +1,620 @@
+<template>
+  <settings>
+    <formatting>
+      <font style="Обычный" family="Times New Roman" size="11"/>
+      <alignment valign="bottom" halign="center"/>
+      <margins left="2" top="1" bottom="1" right="1"/>
+    </formatting>
+  </settings>
+  <layout>
+      <page width="220" height="155" dx="5" dy="0">
+      <field type="text" name="Фамилия_1">
+        <pos x="120" y="23"/>
+        <size width="90" height="8"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="16"/>
+          <alignment valign="bottom" halign="center"/>
+          <margins left="1" top="1" bottom="2" right="1"/>
+        </formatting>
+      </field>
+      <field type="text" name="Имя_Отчество_1">
+        <pos x="120" y="31"/>
+        <size width="90" height="8"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="16"/>
+          <alignment valign="bottom" halign="center"/>
+          <margins left="1" top="1" bottom="2" right="1"/>
+        </formatting>
+      </field>
+      <field type="text" name="Школа_1">
+        <pos x="120" y="57"/>
+        <size width="90" height="5"/>
+        <formatting local="false"/>
+        <text>Муниципальное общеобразовательное учреждение</text>
+      </field>
+      <field type="text" name="Школа_2">
+        <pos x="120" y="62"/>
+        <size width="90" height="5"/>
+        <formatting local="false"/>
+        <text>Раменскую среднюю</text>
+      </field>
+      <field type="text" name="Школа_3">
+        <pos x="120" y="67"/>
+        <size width="90" height="5"/>
+        <formatting local="false"/>
+        <text>общеобразовательную шкoлу №21</text>
+      </field>
+      <field type="text" name="Школа_4">
+        <pos x="120" y="72"/>
+        <size width="90" height="5"/>
+        <formatting local="false"/>
+        <text>с углубленным изучением отдельных предметов</text>
+      </field>
+      <field type="text" name="Школа_5">
+        <pos x="120" y="77"/>
+        <size width="90" height="5"/>
+        <formatting local="false"/>
+        <text>Москoвскoй области</text>
+      </field>
+      <field type="text" name="Год_выдачи">
+        <pos x="147" y="42.5"/>
+        <size width="12" height="6.5"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="11"/>
+          <alignment valign="center" halign="center"/>
+          <margins left="2" top="1" bottom="1.5" right="1"/>
+        </formatting>
+      </field>
+      <field type="text" name="Дата_выдачи_1">
+        <pos x="25" y="118"/>
+        <size width="60" height="6.5"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="11"/>
+          <alignment valign="center" halign="center"/>
+          <margins left="2" top="1" bottom="2" right="1"/>
+        </formatting>
+      </field>
+      <field type="text" name="Подпись_1">
+        <pos x="180" y="120"/>
+        <size width="25" height="6.5"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="11"/>
+          <alignment valign="center" halign="center"/>
+          <margins left="1" top="1" bottom="1" right="1"/>
+        </formatting>
+        <text>Карпова Л.В.</text>
+      </field>
+    </page>
+    <page width="290" height="205" dx="3.5" dy="0">
+      <field type="table" name="Дополнительные">
+        <pos x="12.5" y="18"/>
+        <size width="120" height="125"/>
+        <header>
+          <column width="120">
+            <formatting local="true">
+              <font style="Обычный" family="Times New Roman" size="11"/>
+              <alignment valign="bottom" halign="left"/>
+              <margins left="2.5" top="1" bottom="2" right="1"/>
+            </formatting>
+          </column>
+        </header>
+        <body>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+          </row>
+        </body>
+      </field>
+      <field type="text" name="Подпись_2">
+        <pos x="90" y="180"/>
+        <size width="25" height="6.5"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="11"/>
+          <alignment valign="center" halign="center"/>
+          <margins left="1" top="1" bottom="1" right="1"/>
+        </formatting>
+        <text>Карпова Л.В.</text>
+      </field>
+      <field type="text" name="Дата_выдачи_2">
+        <pos x="42.5" y="154"/>
+        <size width="60" height="8"/>
+        <formatting local="false"/>
+      </field>
+      <field type="text" name="Номер_аттестата">
+        <pos x="183.5" y="76"/>
+        <size width="70" height="8"/>
+        <formatting local="false"/>
+      </field>
+      <field type="text" name="Фамилия_2">
+        <pos x="172.5" y="94"/>
+        <size width="90" height="8"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="16"/>
+          <alignment valign="bottom" halign="center"/>
+          <margins left="1" top="1" bottom="2" right="1"/>
+        </formatting>
+      </field>
+      <field type="text" name="Имя_Отчество_2">
+        <pos x="172.5" y="102"/>
+        <size width="90" height="8"/>
+        <formatting local="true">
+          <font style="Обычный" family="Times New Roman" size="16"/>
+          <alignment valign="bottom" halign="center"/>
+          <margins left="1" top="1" bottom="2" right="1"/>
+        </formatting>
+      </field>
+      <field type="text" name="Дата_рождения">
+        <pos x="188.5" y="140"/>
+        <size width="60" height="8"/>
+        <formatting local="false"/>
+      </field>
+    </page>
+    <page width="290" height="205" dx="4.5" dy="1">
+      <field type="table" name="Оценки_1">
+        <pos x="11" y="22.5"/>
+        <size width="129" height="170"/>
+        <header>
+          <column width="87">
+            <formatting local="true">
+              <font style="Обычный" family="Times New Roman" size="11"/>
+              <alignment valign="bottom" halign="left"/>
+              <margins left="4.5" top="1" bottom="2" right="1"/>
+            </formatting>
+          </column>
+          <column width="42">
+            <formatting local="true">
+              <font style="Обычный" family="Times New Roman" size="11"/>
+              <alignment valign="bottom" halign="left"/>
+              <margins left="4.5" top="1" bottom="2" right="1"/>
+            </formatting>
+          </column>
+        </header>
+        <body>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+        </body>
+      </field>
+      <field type="table" name="Оценки_2">
+        <pos x="149" y="22.5"/>
+        <size width="129" height="170"/>
+        <header>
+          <column width="87">
+            <formatting local="true">
+              <font style="Обычный" family="Times New Roman" size="11"/>
+              <alignment valign="bottom" halign="left"/>
+              <margins left="2" top="1" bottom="2" right="1"/>
+            </formatting>
+          </column>
+          <column width="42">
+            <formatting local="true">
+              <font style="Обычный" family="Times New Roman" size="11"/>
+              <alignment valign="bottom" halign="left"/>
+              <margins left="2" top="1" bottom="2" right="1"/>
+            </formatting>
+          </column>
+        </header>
+        <body>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+          <row height="5">
+            <text></text>
+            <text></text>
+          </row>
+        </body>
+      </field>
+    </page>
+  </layout>
+  <sources>
+    <source type="table" name="Дополнительные" subtype="xml">
+      <xml_table filename="attestates.xml">
+        <xqueries>
+          <xpass>//attestates/attestate[@number=$ID]/additional/line/string()</xpass>
+        </xqueries>
+      </xml_table>
+      <assigned_fields>
+        <assigned_field>Дополнительные</assigned_field>
+      </assigned_fields>
+    </source>
+    <source type="table" name="Оценки" subtype="xml">
+      <xml_table filename="attestates.xml">
+        <xqueries>
+          <xpass>//attestates/attestate[@number=$ID]/subjects/subject/name/string()</xpass>
+          <xpass>//attestates/attestate[@number=$ID]/subjects/subject/grade/string()</xpass>
+        </xqueries>
+      </xml_table>
+      <assigned_fields>
+        <assigned_field>Оценки_1</assigned_field>
+        <assigned_field>Оценки_2</assigned_field>
+      </assigned_fields>
+    </source>
+    <source type="text" name="Дата_рождения" subtype="xml">
+      <xml_text filename="attestates.xml">
+        <xpass>//attestates/attestate[@number=$ID]/birth_date/string()</xpass>
+      </xml_text>
+      <assigned_fields>
+        <assigned_field>Дата_рождения</assigned_field>
+      </assigned_fields>
+    </source>
+    <source type="text" name="Дата_выдачи" subtype="xml">
+      <xml_text filename="attestates.xml">
+        <xpass>//attestates/attestate[@number=$ID]/issue_date/string()</xpass>
+      </xml_text>
+      <assigned_fields>
+        <assigned_field>Дата_выдачи_1</assigned_field>
+        <assigned_field>Дата_выдачи_2</assigned_field>
+      </assigned_fields>
+    </source>
+    <source type="text" name="Имя_Отчество" subtype="xml">
+      <xml_text filename="attestates.xml">
+        <xpass>//attestates/attestate[@number=$ID]/name/firstname/string()</xpass>
+      </xml_text>
+      <assigned_fields>
+        <assigned_field>Имя_Отчество_1</assigned_field>
+        <assigned_field>Имя_Отчество_2</assigned_field>
+      </assigned_fields>
+    </source>
+    <source type="text" name="Номер_аттестата" subtype="xml">
+      <xml_text filename="attestates.xml">
+        <xpass>//attestates/attestate[@number=$ID]/number/string()</xpass>
+      </xml_text>
+      <assigned_fields>
+        <assigned_field>Номер_аттестата</assigned_field>
+      </assigned_fields>
+    </source>
+    <source type="text" name="Фамилия" subtype="xml">
+      <xml_text filename="attestates.xml">
+        <xpass>//attestates/attestate[@number=$ID]/name/lastname/string()</xpass>
+      </xml_text>
+      <assigned_fields>
+        <assigned_field>Фамилия_1</assigned_field>
+        <assigned_field>Фамилия_2</assigned_field>
+      </assigned_fields>
+    </source>
+  </sources>
+</template>

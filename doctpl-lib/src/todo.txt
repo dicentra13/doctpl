@@ -1,0 +1,16 @@
+TableField tests
+- construction DOCTPL_ERRORs
+- formatting test
+- add text checks to checkField()
+
+Formatting tests
+
+Serialization tests
+
+TableField line crossing
+
+Painting context and correct painting
+
+App
+
+Sources ?
