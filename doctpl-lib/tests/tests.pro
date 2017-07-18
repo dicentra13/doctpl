@@ -15,7 +15,7 @@ SOURCES += \
 
 win32:LIBS += \
     "C:/boost/boost_1_62_0/lib/lib/libboost_unit_test_framework-mgw53-mt-d-1_62.dll" \
-    "C:/projects/doctpl/build-lib-debug/src/debug/doctpl.dll"
+    "C:/projects/doctpl/build-doctpl-lib/src/debug/doctpl.dll"
 
 HEADERS += \
     app_fixture.h \
