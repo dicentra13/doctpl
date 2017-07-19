@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>images/document-new.png</file>
+        <file>images/document-properties.png</file>
+        <file>images/edit-delete.png</file>
+        <file>images/go-next.png</file>
+        <file>images/go-previous.png</file>
+        <file>images/format-justify-left.png</file>
+        <file>images/format-justify-center.png</file>
+        <file>images/format-justify-right.png</file>
+        <file>images/format-justify-vertical-bottom.png</file>
+        <file>images/format-justify-vertical-center.png</file>
+        <file>images/format-justify-vertical-top.png</file>
+        <file>images/fields/table.png</file>
+        <file>images/fields/text.png</file>
+        <file>images/fields/xml_table.png</file>
+    </qresource>
+    <qresource prefix="/attestate/ru" lang="ru">
+        <file>interface_ru.qm</file>
+    </qresource>
+    <qresource prefix="/attestate/en" lang="en">
+        <file>interface_en.qm</file>
+    </qresource>
+</RCC>
