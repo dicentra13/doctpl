@@ -123,7 +123,7 @@ void FitWidthViewImpl::processDoubleClickEvent(QMouseEvent* event)
 void FitWidthViewImpl::adjust()
 {
     view_->setDragMode(QGraphicsView::NoDrag);
-    view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     view_->horizontalScrollBar()->hide();
 
