@@ -4,6 +4,7 @@
 #include <doctpl/exception.h>
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QPrinter>
 #include <QPainter>
 
@@ -157,6 +158,11 @@ public:
             }
         }
         painter.end();
+    }
+
+    void addView(QGraphicsView* view)
+    {
+        view->setScene(scene_.get());
     }
 
 private:
@@ -318,6 +324,11 @@ void Layout::print(const QString& filename, const std::set<Index>& pages) const
         impl_->checkIndexIsValid(i);
     }
     impl_->print(filename, pages);
+}
+
+void Layout::addView(QGraphicsView* view)
+{
+    impl_->addView(view);
 }
 
 } // namespace doctpl

@@ -4,6 +4,7 @@
 
 #include <doctpl/field.h>
 #include <doctpl/page.h>
+#include <doctpl/layout.h>
 
 #include <QWheelEvent>
 #include <QMouseEvent>
@@ -26,10 +27,10 @@ View::View(
         layout_,
         this,
         DefaultViewCallbacks {
-            [this] (QWheelEvent* e) { wheelEvent(e); },
-            [this] (QResizeEvent* e) { resizeEvent(e); },
-            [this] (int dx, int dy) { scrollContentsBy(dx, dy); },
-            [this] (QMouseEvent* e) { mouseDoubleClickEvent(e); }
+            [this] (QWheelEvent* e) { QGraphicsView::wheelEvent(e); },
+            [this] (QResizeEvent* e) { QGraphicsView::resizeEvent(e); },
+            [this] (int dx, int dy) { QGraphicsView::scrollContentsBy(dx, dy); },
+            [this] (QMouseEvent* e) { QGraphicsView::mouseDoubleClickEvent(e); }
         },
         LayoutObjectCallbacks{
             [this] (doctpl::Field* f)
@@ -39,6 +40,12 @@ View::View(
         }));
 
     setBackgroundBrush(QBrush(QColor(Qt::gray)));
+
+    layout_->addView(this);
+    if (layout_->pagesCount() > 0) {
+        currentPage_ = layout_->page(0);
+    }
+    layout_->setPageSeparator(4.0);
 
     impl_->adjust();
 }

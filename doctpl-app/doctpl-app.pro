@@ -1,9 +1,8 @@
 QT += core gui \
-#    xml \
-#    xmlpatterns \
+    xml \
+    xmlpatterns \
 #    opengl \
-#    gui \
-#    widgets \
+    widgets \
     printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

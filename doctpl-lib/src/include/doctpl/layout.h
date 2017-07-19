@@ -10,6 +10,8 @@
 #include <set>
 #include <memory>
 
+class QGraphicsView;
+
 namespace doctpl {
 
 class Template;
@@ -62,6 +64,9 @@ public:
 
     void print(const QString& filename) const;
     void print(const QString& filename, const std::set<Index>& pages) const;
+
+    // all views should be deleted prior to layout
+    void addView(QGraphicsView* view);
 
 private:
     class Impl;
