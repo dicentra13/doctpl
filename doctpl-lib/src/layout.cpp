@@ -17,8 +17,12 @@ class Layout::Impl {
 public:
     typedef Layout::Index I;
 
-    Impl(Template* doc, Layout* layout)
+    Impl(
+            Template* doc,
+            Layout::ItemSelectionPolicy policy,
+            Layout* layout)
         : document_(doc)
+        , itemSelectionPolicy_(policy)
         , layout_(layout)
         , scene_(new QGraphicsScene)
         , pageSeparator_(0.0)
@@ -165,6 +169,13 @@ public:
         view->setScene(scene_.get());
     }
 
+    Layout::ItemSelectionPolicy itemSelectionPolicy() const { return itemSelectionPolicy_; }
+
+    void setItemSelectionPolicy(Layout::ItemSelectionPolicy policy)
+    {
+        itemSelectionPolicy_ = policy;
+    }
+
 private:
     void movePages(I start, I end, double delta)
     {
@@ -210,6 +221,7 @@ private:
     }
 
     Template* document_;
+    Layout::ItemSelectionPolicy itemSelectionPolicy_;
     Layout* layout_;
     std::unique_ptr<QGraphicsScene> scene_;
     std::vector<Page*> pages_;
@@ -219,8 +231,8 @@ private:
 
 // Layout
 
-Layout::Layout(Template* document)
-    : impl_(new Impl(document, this))
+Layout::Layout(Template* document, ItemSelectionPolicy policy)
+    : impl_(new Impl(document, policy, this))
 {}
 
 Layout::~Layout() {}
@@ -316,6 +328,16 @@ void Layout::print(const QString& filename, const std::set<Index>& pages) const
 void Layout::addView(QGraphicsView* view)
 {
     impl_->addView(view);
+}
+
+Layout::ItemSelectionPolicy Layout::itemSelectionPolicy() const
+{
+    return impl_->itemSelectionPolicy();
+}
+
+void Layout::setItemSelectionPolicy(ItemSelectionPolicy policy)
+{
+    impl_->setItemSelectionPolicy(policy);
 }
 
 } // namespace doctpl

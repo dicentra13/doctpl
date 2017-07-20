@@ -21,7 +21,11 @@ class Layout : public QObject {
     Q_OBJECT
 
 public:
-    explicit Layout(Template* document);
+    enum class ItemSelectionPolicy;
+
+    explicit Layout(
+        Template* document,
+        ItemSelectionPolicy policy = ItemSelectionPolicy::Disable);
 
     virtual ~Layout();
 
@@ -60,6 +64,13 @@ public:
 
     // all views should be deleted prior to layout
     void addView(QGraphicsView* view);
+
+    // item selection
+
+    enum class ItemSelectionPolicy {Disable, Single, Multiple};
+
+    ItemSelectionPolicy itemSelectionPolicy() const;
+    void setItemSelectionPolicy(ItemSelectionPolicy policy);
 
 private:
     class Impl;
