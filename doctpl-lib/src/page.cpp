@@ -51,14 +51,9 @@ public:
 };
 
 
-Page::Page(const QSizeF& size, Layout* layout)
-    : LayoutItem(size)
-    , impl_(new Impl(size, 0.0, 0.0, this, layout))
-{}
-
-Page::Page(const QSizeF& size, double dx, double dy, Layout* layout)
-    : LayoutItem(size)
-    , impl_(new Impl(size, dx, dy, this, layout))
+Page::Page(InitData data, Layout* layout)
+    : LayoutItem(layout, data.size, std::move(data.style))
+    , impl_(new Impl(data.size, data.offset.dx, data.offset.dy, this, layout))
 {}
 
 Page::~Page() {}
@@ -194,10 +189,10 @@ bool Page::checkGeometryAvailable(
     return result;
 }
 
-void Page::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
+/*void Page::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
 {
     QGraphicsItem::mouseDoubleClickEvent(event);
     //this->setCurrent(true); // set current page in context
 }
-
+*/
 } // namespace doctpl

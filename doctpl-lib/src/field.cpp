@@ -31,8 +31,12 @@ Field::Field(
         const QString &name,
         const QSizeF& size,
         const QPointF& pos,
+        StylePtr style,
         Page* page)
-    : LayoutItem(size)
+    : LayoutItem(
+        page ? page->layout() : nullptr,
+        size,
+        std::move(style))
     , impl_(new Impl(name))
 {
     ASSERT(page);

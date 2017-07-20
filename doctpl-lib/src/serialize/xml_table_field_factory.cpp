@@ -73,7 +73,7 @@ Field* tableFieldXMLFactory(const QDomElement& fieldElement, Page* page)
     }
 
     TableField* f = new TableField(
-        common.name, widths, heights, common.pos, std::move(fs), page);
+        common.name, widths, heights, common.pos, std::move(fs), defaultStyle(), page);
 
     for (size_t i = 0; i < heights.size(); ++i) {
         for (size_t j = 0; j < widths.size(); ++j) {

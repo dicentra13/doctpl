@@ -7,14 +7,20 @@
 namespace doctpl {
 
 struct LayoutItem::Impl {
+    const Layout* layout;
+
     double width;
     double height;
+
+    StylePtr style;
 };
 
-LayoutItem::LayoutItem(const QSizeF& size)
+LayoutItem::LayoutItem(const Layout* layout, const QSizeF& size, StylePtr style)
 {
+    ASSERT(layout);
     REQUIRE(size.isValid(), "Invalid layout item dimensions");
-    impl_.reset(new Impl{size.width(), size.height()});
+    REQUIRE(style, "Nullptr style");
+    impl_.reset(new Impl{layout, size.width(), size.height(), std::move(style)});
 }
 
 LayoutItem::~LayoutItem() {}
@@ -44,5 +50,11 @@ void LayoutItem::setHeight(double height)
 }
 
 double LayoutItem::height() const { return impl_->height; }
+
+const StylePtr& LayoutItem::style() const { return impl_->style; }
+
+void LayoutItem::setStyle(StylePtr style) { impl_->style = std::move(style); }
+
+const Layout* LayoutItem::layout() const { return impl_->layout; }
 
 } // namespace doctpl

@@ -58,9 +58,9 @@ BOOST_AUTO_TEST_CASE(test_create_and_delete)
 {
     Template doc;
     Layout* l = doc.layout();
-    Page* p = l->append({100.0, 100.0});
+    Page* p = l->append({{100.0, 100.0}, defaultStyle()});
     TableField* f = new TableField(
-        NAME_1, {10.0, 5.0}, {0.0, 0.0}, 5, 2, createFormatting(FORMAT_1), p);
+        NAME_1, {10.0, 5.0}, {0.0, 0.0}, 5, 2, createFormatting(FORMAT_1), defaultStyle(), p);
     BOOST_CHECK(f->page() == p);
     BOOST_CHECK(f->fieldType() == "table");
     BOOST_CHECK(f->name() == NAME_1);
@@ -87,13 +87,13 @@ BOOST_AUTO_TEST_CASE(test_create_and_delete_2)
 {
     Template doc;
     Layout* l = doc.layout();
-    Page* p = l->append({100.0, 100.0});
+    Page* p = l->append({{100.0, 100.0}, defaultStyle()});
 
     Sizes w = {5.0, 6.0};
     Sizes h = {1.0, 2.0, 3.0};
     std::vector<FormattingSettingsPtr> fs(2, createFormatting(FORMAT_1));
 
-    TableField* f = new TableField(NAME_2, w, h, {0.0, 0.0}, fs, p);
+    TableField* f = new TableField(NAME_2, w, h, {0.0, 0.0}, fs, defaultStyle(), p);
 
     BOOST_CHECK(f->page() == p);
     BOOST_CHECK(f->fieldType() == "table");
@@ -131,12 +131,13 @@ std::unique_ptr<Template> createTestDoc()
 {
     std::unique_ptr<Template> doc(new Template);
     Layout* l = doc->layout();
-    Page* p = l->append({100.0, 100.0});
+    Page* p = l->append({{100.0, 100.0}, defaultStyle()});
     new TableField(
         NAME_1,
         W, H,
         {0.0, 0.0},
         std::vector<FormattingSettingsPtr>(W.size(), createFormatting(FORMAT_1)),
+        defaultStyle(),
         p);
     return doc;
 }

@@ -53,34 +53,34 @@ BOOST_AUTO_TEST_CASE(test_insert)
     l->setPageSeparator(5.0);
     BOOST_CHECK(l->pageSeparator() == 5.0);
 
-    const Page* p = l->append({200.0, 100.0});
+    const Page* p = l->append({{200.0, 100.0}, defaultStyle()});
     BOOST_CHECK(p == l->page(0));
     BOOST_CHECK(p->width() == 200.0 && p->height() == 100.0);
     BOOST_CHECK(p->dx() == 0.0 && p->dy() == 0.0);
     checkPages(l, {p});
 
-    const Page* p2 = l->insert(0, {300.0, 200.0}, 2.0, 3.0);
+    const Page* p2 = l->insert(0, {{300.0, 200.0}, defaultStyle(), {2.0, 3.0}});
     BOOST_CHECK(p2 == l->page(0));
     BOOST_CHECK(p2->width() == 300.0 && p2->height() == 200.0);
     BOOST_CHECK(p2->dx() == 2.0 && p2->dy() == 3.0);
     checkPages(l, {p2, p});
 
-    const Page* p3 = l->insert(2, {400.0, 300.0});
+    const Page* p3 = l->insert(2, {{400.0, 300.0}, defaultStyle()});
     BOOST_CHECK(p3 == l->page(2));
     BOOST_CHECK(p3->dx() == 0.0 && p3->dy() == 0.0);
     checkPages(l, {p2, p, p3});
 
-    const Page* p4 = l->append({400.0, 300.0}, 2.0, 3.0);
+    const Page* p4 = l->append({{400.0, 300.0}, defaultStyle(), {2.0, 3.0}});
     BOOST_CHECK(p4 == l->page(3));
     BOOST_CHECK(p4->dx() == 2.0 && p4->dy() == 3.0);
     checkPages(l, {p2, p, p3, p4});
 
-    const Page* p5 = l->insert(2, {400.0, 300.0});
+    const Page* p5 = l->insert(2, {{400.0, 300.0}, defaultStyle()});
     BOOST_CHECK(p5 == l->page(2));
     checkPages(l, {p2, p, p5, p3, p4});
 
     // index out of range
-    BOOST_CHECK_THROW(l->insert(6, {400.0, 300.0}), Exception);
+    BOOST_CHECK_THROW(l->insert(6, {{400.0, 300.0}, defaultStyle()}), Exception);
 }
 
 BOOST_AUTO_TEST_CASE(test_page_access)
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(test_page_access)
     Template doc;
     Layout* l = doc.layout();
     Template doc2;
-    const Page* op = doc2.layout()->append({200.0, 100.0});
+    const Page* op = doc2.layout()->append({{200.0, 100.0}, defaultStyle()});
     BOOST_CHECK(l->pageIndex(op) == l->end());
 
     // invalid index
@@ -102,13 +102,13 @@ BOOST_AUTO_TEST_CASE(test_page_move)
     Template doc;
     Layout* l = doc.layout();
 
-    const Page* p1 = l->append({200.0, 100.0});
+    const Page* p1 = l->append({{200.0, 100.0}, defaultStyle()});
     checkPages(l, {p1});
-    const Page* p2 = l->append({200.0, 100.0});
+    const Page* p2 = l->append({{200.0, 100.0}, defaultStyle()});
     checkPages(l, {p1, p2});
-    const Page* p3 = l->append({200.0, 100.0});
+    const Page* p3 = l->append({{200.0, 100.0}, defaultStyle()});
     checkPages(l, {p1, p2, p3});
-    const Page* p4 = l->append({200.0, 100.0});
+    const Page* p4 = l->append({{200.0, 100.0}, defaultStyle()});
     checkPages(l, {p1, p2, p3, p4});
 
     auto CHECK_MOVE = [l] (
@@ -147,10 +147,10 @@ BOOST_AUTO_TEST_CASE(test_erase)
     Template doc;
     Layout* l = doc.layout();
 
-    /*const Page* p1 =*/ l->append({200.0, 100.0});
-    const Page* p2 = l->append({200.0, 100.0});
-    const Page* p3 = l->append({200.0, 100.0});
-    const Page* p4 = l->append({200.0, 100.0});
+    /*const Page* p1 =*/ l->append({{200.0, 100.0}, defaultStyle()});
+    const Page* p2 = l->append({{200.0, 100.0}, defaultStyle()});
+    const Page* p3 = l->append({{200.0, 100.0}, defaultStyle()});
+    const Page* p4 = l->append({{200.0, 100.0}, defaultStyle()});
 
     // invalid index
     BOOST_CHECK_THROW(l->erase(4), Exception);
@@ -180,11 +180,11 @@ BOOST_AUTO_TEST_CASE(test_erase_fields)
     Template doc;
     Layout* l = doc.layout();
 
-    Page* p = l->append({200.0, 100.0});
+    Page* p = l->append({{200.0, 100.0}, defaultStyle()});
     TableField* f1 = new TableField(
-        NAME_1, {10.0, 5.0}, {0.0, 0.0}, 5, 2, createFormatting(FORMAT), p);
+        NAME_1, {10.0, 5.0}, {0.0, 0.0}, 5, 2, createFormatting(FORMAT), defaultStyle(), p);
     TextField* f2 = new TextField(
-        NAME_2, {10.0, 5.0}, {0.0, 0.0}, createFormatting(FORMAT), p);
+        NAME_2, {10.0, 5.0}, {0.0, 0.0}, createFormatting(FORMAT), defaultStyle(), p);
     auto fields = doc.fields();
     BOOST_CHECK(fields->as<TextField>()->find(NAME_2) == f2);
     BOOST_CHECK(fields->as<TableField>()->find(NAME_1) == f1);
@@ -199,11 +199,11 @@ BOOST_AUTO_TEST_CASE(test_page_fields_manip)
     Template doc;
     Layout* l = doc.layout();
 
-    Page* p = l->append({200.0, 100.0});
+    Page* p = l->append({{200.0, 100.0}, defaultStyle()});
     TableField* f1 = new TableField(
-        NAME_1, {10.0, 5.0}, {0.0, 0.0}, 5, 2, createFormatting(FORMAT), p);
+        NAME_1, {10.0, 5.0}, {0.0, 0.0}, 5, 2, createFormatting(FORMAT), defaultStyle(), p);
     TextField* f2 = new TextField(
-        NAME_2, {10.0, 5.0}, {0.0, 0.0}, createFormatting(FORMAT), p);
+        NAME_2, {10.0, 5.0}, {0.0, 0.0}, createFormatting(FORMAT), defaultStyle(), p);
     auto fields = doc.fields();
     BOOST_CHECK(fields->as<TextField>()->find(NAME_2) == f2);
     BOOST_CHECK(fields->as<TableField>()->find(NAME_1) == f1);
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(test_page_fields_manip)
     BOOST_CHECK(std::find(pf.begin(), pf.end(), f1) != pf.end());
     BOOST_CHECK(std::find(pf.begin(), pf.end(), f2) != pf.end());
 
-    Page* p2 = l->append({200.0, 100.0});
+    Page* p2 = l->append({{200.0, 100.0}, defaultStyle()});
     p2->addField(f1, {0.0, 0.0});
     p2->addField(f2, {0.0, 0.0});
     BOOST_CHECK(fields->as<TextField>()->find(NAME_2) == f2);
@@ -237,10 +237,10 @@ BOOST_AUTO_TEST_CASE(test_page_resize)
     Template doc;
     Layout* l = doc.layout();
 
-    Page* p1 = l->append({200.0, 100.0});
-    Page* p2 = l->append({200.0, 100.0});
-    Page* p3 = l->append({200.0, 100.0});
-    Page* p4 = l->append({200.0, 100.0});
+    Page* p1 = l->append({{200.0, 100.0}, defaultStyle()});
+    Page* p2 = l->append({{200.0, 100.0}, defaultStyle()});
+    Page* p3 = l->append({{200.0, 100.0}, defaultStyle()});
+    Page* p4 = l->append({{200.0, 100.0}, defaultStyle()});
 
     p1->setHeight(200.0);
     BOOST_CHECK(p1->height() == 200.0);
@@ -266,19 +266,19 @@ BOOST_AUTO_TEST_CASE(test_invalid_page_dimensions)
     Template doc;
     Layout* l = doc.layout();
 
-    Page* p = l->append({200.0, 100.0});
+    Page* p = l->append({{200.0, 100.0}, defaultStyle()});
 
     BOOST_CHECK_THROW(p->setWidth(-1.0), Exception);
     BOOST_CHECK_THROW(p->setHeight(-1.0), Exception);
 
-    BOOST_CHECK_THROW(l->append({-200.0, 100.0}), Exception);
-    BOOST_CHECK_THROW(l->append({200.0, -100.0}), Exception);
-    BOOST_CHECK_THROW(l->append({-200.0, 100.0}, 1.0, 1.0), Exception);
-    BOOST_CHECK_THROW(l->append({200.0, -100.0}, 1.0, 1.0), Exception);
-    BOOST_CHECK_THROW(l->insert(0, {-200.0, 100.0}), Exception);
-    BOOST_CHECK_THROW(l->insert(0, {200.0, -100.0}), Exception);
-    BOOST_CHECK_THROW(l->insert(0, {-200.0, 100.0}, 1.0, 1.0), Exception);
-    BOOST_CHECK_THROW(l->insert(0, {200.0, -100.0}, 1.0, 1.0), Exception);
+    BOOST_CHECK_THROW(l->append({{-200.0, 100.0}, defaultStyle()}), Exception);
+    BOOST_CHECK_THROW(l->append({{200.0, -100.0}, defaultStyle()}), Exception);
+    BOOST_CHECK_THROW(l->append({{-200.0, 100.0}, defaultStyle(), {1.0, 1.0}}), Exception);
+    BOOST_CHECK_THROW(l->append({{200.0, -100.0}, defaultStyle(), {1.0, 1.0}}), Exception);
+    BOOST_CHECK_THROW(l->insert(0, {{-200.0, 100.0}, defaultStyle()}), Exception);
+    BOOST_CHECK_THROW(l->insert(0, {{200.0, -100.0}, defaultStyle()}), Exception);
+    BOOST_CHECK_THROW(l->insert(0, {{-200.0, 100.0}, defaultStyle(), {1.0, 1.0}}), Exception);
+    BOOST_CHECK_THROW(l->insert(0, {{200.0, -100.0}, defaultStyle(), {1.0, 1.0}}), Exception);
 }
 
 BOOST_AUTO_TEST_CASE(test_page_orientation)
@@ -286,7 +286,7 @@ BOOST_AUTO_TEST_CASE(test_page_orientation)
     Template doc;
     Layout* l = doc.layout();
 
-    Page* p = l->append({200.0, 100.0});
+    Page* p = l->append({{200.0, 100.0}, defaultStyle()});
     BOOST_CHECK(p->orientation() == QPrinter::Orientation::Landscape);
     p->setOrientation(QPrinter::Orientation::Landscape);
     BOOST_CHECK(p->width() == 200.0 && p->height() == 100.0

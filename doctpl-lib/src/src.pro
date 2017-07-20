@@ -19,7 +19,8 @@ SOURCES += layout.cpp \
     serialize/xml_helpers.cpp \
     serialize/xml_text_field_factory.cpp \
     serialize/xml_table_field_factory.cpp \
-    settings.cpp
+    settings.cpp \
+    style_options.cpp
 
 HEADERS += \
     include/doctpl/layout.h \
@@ -39,7 +40,8 @@ HEADERS += \
     serialize/xml_magic_strings.h \
     serialize/xml_text_field_factory.h \
     serialize/xml_table_field_factory.h \
-    include/doctpl/settings.h
+    include/doctpl/settings.h \
+    include/doctpl/style_options.h
 
 OTHER_FILES += \
     todo.txt

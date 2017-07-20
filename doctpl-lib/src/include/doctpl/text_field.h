@@ -12,10 +12,11 @@ class Page;
 class TextField : public WatchedField<TextField> {
 public:
     TextField(
-        const QString &name,
+        const QString& name,
         const QSizeF& size,
         const QPointF& pos,
         const FormattingSettingsPtr& formattingSettings,
+        StylePtr style,
         Page* page);
 
     virtual ~TextField();

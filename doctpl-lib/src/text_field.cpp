@@ -38,11 +38,13 @@ TextField::TextField(
         const QSizeF& size,
         const QPointF& pos,
         const FormattingSettingsPtr& formattingSettings,
+        StylePtr style,
         Page* page)
     : WatchedField<TextField>(
         name,
         size,
         pos,
+        std::move(style),
         page,
         {page->layout()->document()->fields()->as<TextField>()})
     , impl_(new Impl(size.width(), size.height(), formattingSettings, this))

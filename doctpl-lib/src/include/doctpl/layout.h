@@ -31,17 +31,10 @@ public:
 
     Page* insert(
         Index at,
-        const QSizeF& size);
-
-    Page* insert(
-        Index at,
-        const QSizeF& size, double dx, double dy);
+        Page::InitData data);
 
     Page* append(
-        const QSizeF& size);
-
-    Page* append(
-        const QSizeF& size, double dx, double dy);
+        Page::InitData data);
 
     void move(Index from, Index to);
     void erase(Index at);

@@ -52,6 +52,7 @@ typedef uint32_t StyleModifier;
 
 class Style {
 public:
+    /// creates empty style - no painting
     Style();
 
     Style(const Style&);
@@ -65,16 +66,21 @@ public:
     StyleModifier modifier() const;
     void setModifier(StyleModifier modifier);
 
-    void addPen(const QPen& pen, LineStyleRole role);
+    void setPen(const QPen& pen, LineStyleRole role);
     const QPen& pen(LineStyleRole role) const;
 
-    void addBrush(const QBrush& brush, BackgroundStyleRole role);
+    void setBrush(const QBrush& brush, BackgroundStyleRole role);
     const QBrush& brush(BackgroundStyleRole role) const;
 
 private:
-    struct Impl;
+    class Impl;
 
     std::unique_ptr<Impl> impl_;
 };
+
+typedef std::shared_ptr<Style> StylePtr;
+
+/// returns deafult (empty) Style instance
+StylePtr defaultStyle();
 
 } // namespace doctpl
