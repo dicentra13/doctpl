@@ -63,10 +63,28 @@ QGraphicsItem* Page::fieldsParent() const { return impl_->item; }
 Layout* Page::layout() const { return impl_->layout; }
 
 void Page::paint(
-    QPainter* /*painter*/,
+    QPainter* painter,
     const QStyleOptionGraphicsItem* /*option*/,
     QWidget* /*widget*/)
 {
+    painter->save();
+
+    const Style& s = *style();
+
+    const QPen& pen = s.modifier() & StyleModifiers::ENABLE_PAGE_FRAME
+        ? s.pen(LineStyleRole::PageFrame)
+        : QPen(Qt::NoPen);
+
+    const QBrush& brush = s.modifier() & StyleModifiers::ENABLE_PAGE_BACKGROUND
+        ? s.brush(BackgroundStyleRole::Page)
+        : QBrush(Qt::NoBrush);
+
+    painter->setPen(pen);
+    painter->setBrush(brush);
+    painter->drawRect(QRectF(QPointF(0.0, 0.0), QPointF(width(), height())));
+
+    painter->restore();
+
 //    painter->save();
 //    QPen cur(painter->pen());
 //    if (isCurrent_)

@@ -21,11 +21,11 @@ class Layout : public QObject {
     Q_OBJECT
 
 public:
-    enum class ItemSelectionPolicy;
+    enum class FieldSelectionPolicy;
 
     explicit Layout(
         Template* document,
-        ItemSelectionPolicy policy = ItemSelectionPolicy::Disable);
+        FieldSelectionPolicy policy = FieldSelectionPolicy::Disable);
 
     virtual ~Layout();
 
@@ -67,10 +67,10 @@ public:
 
     // item selection
 
-    enum class ItemSelectionPolicy {Disable, Single, Multiple};
+    enum class FieldSelectionPolicy {Disable, Single, Multiple};
 
-    ItemSelectionPolicy itemSelectionPolicy() const;
-    void setItemSelectionPolicy(ItemSelectionPolicy policy);
+    FieldSelectionPolicy fieldSelectionPolicy() const;
+    void setFieldSelectionPolicy(FieldSelectionPolicy policy);
 
 private:
     class Impl;

@@ -19,10 +19,10 @@ public:
 
     Impl(
             Template* doc,
-            Layout::ItemSelectionPolicy policy,
+            Layout::FieldSelectionPolicy policy,
             Layout* layout)
         : document_(doc)
-        , itemSelectionPolicy_(policy)
+        , fieldSelectionPolicy_(policy)
         , layout_(layout)
         , scene_(new QGraphicsScene)
         , pageSeparator_(0.0)
@@ -169,11 +169,11 @@ public:
         view->setScene(scene_.get());
     }
 
-    Layout::ItemSelectionPolicy itemSelectionPolicy() const { return itemSelectionPolicy_; }
+    Layout::FieldSelectionPolicy fieldSelectionPolicy() const { return fieldSelectionPolicy_; }
 
-    void setItemSelectionPolicy(Layout::ItemSelectionPolicy policy)
+    void setFieldSelectionPolicy(Layout::FieldSelectionPolicy policy)
     {
-        itemSelectionPolicy_ = policy;
+        fieldSelectionPolicy_ = policy;
     }
 
 private:
@@ -221,7 +221,7 @@ private:
     }
 
     Template* document_;
-    Layout::ItemSelectionPolicy itemSelectionPolicy_;
+    Layout::FieldSelectionPolicy fieldSelectionPolicy_;
     Layout* layout_;
     std::unique_ptr<QGraphicsScene> scene_;
     std::vector<Page*> pages_;
@@ -231,7 +231,7 @@ private:
 
 // Layout
 
-Layout::Layout(Template* document, ItemSelectionPolicy policy)
+Layout::Layout(Template* document, FieldSelectionPolicy policy)
     : impl_(new Impl(document, policy, this))
 {}
 
@@ -330,14 +330,14 @@ void Layout::addView(QGraphicsView* view)
     impl_->addView(view);
 }
 
-Layout::ItemSelectionPolicy Layout::itemSelectionPolicy() const
+Layout::FieldSelectionPolicy Layout::fieldSelectionPolicy() const
 {
-    return impl_->itemSelectionPolicy();
+    return impl_->fieldSelectionPolicy();
 }
 
-void Layout::setItemSelectionPolicy(ItemSelectionPolicy policy)
+void Layout::setFieldSelectionPolicy(FieldSelectionPolicy policy)
 {
-    impl_->setItemSelectionPolicy(policy);
+    impl_->setFieldSelectionPolicy(policy);
 }
 
 } // namespace doctpl

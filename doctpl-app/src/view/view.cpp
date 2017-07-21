@@ -5,6 +5,7 @@
 #include <doctpl/field.h>
 #include <doctpl/page.h>
 #include <doctpl/layout.h>
+#include <doctpl/style_options.h>
 
 #include <QWheelEvent>
 #include <QMouseEvent>
@@ -40,6 +41,20 @@ View::View(
         }));
 
     setBackgroundBrush(QBrush(QColor(Qt::gray)));
+
+    auto defaultStylePtr = doctpl::defaultStyle();
+    defaultStylePtr->setModifier(
+        doctpl::StyleModifiers::ENABLE_PAGE_FRAME |
+        doctpl::StyleModifiers::ENABLE_PAGE_BACKGROUND |
+        doctpl::StyleModifiers::ENABLE_FIELD_FRAME |
+        doctpl::StyleModifiers::ENABLE_FIELD_BACKGROUND);
+
+    QPen pen(Qt::black);
+    pen.setWidth(0);
+    defaultStylePtr->setPen(pen, doctpl::LineStyleRole::PageFrame);
+    defaultStylePtr->setPen(pen, doctpl::LineStyleRole::FieldFrame);
+
+    defaultStylePtr->setBrush(QBrush(Qt::white), doctpl::BackgroundStyleRole::Page);
 
     layout_->addView(this);
     if (layout_->pagesCount() > 0) {

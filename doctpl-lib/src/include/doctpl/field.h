@@ -37,6 +37,10 @@ public:
     void setName(const QString& name);
     const QString& name() const;
 
+    // selection
+    //void setSelected(bool isSelected);
+    //bool isSelected() const;
+
 protected:
     Field(
         const QString& name,
