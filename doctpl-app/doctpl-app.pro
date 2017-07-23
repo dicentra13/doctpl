@@ -33,13 +33,15 @@ SOURCES += \
     src/template_editor.cpp \
     src/view/view_impl.cpp \
     src/view/view.cpp \
-    src/view/fit_width_view_impl.cpp
+    src/view/fit_width_view_impl.cpp \
+    src/page_toolbar.cpp
 
 HEADERS += \
     src/template_editor.h \
     src/view/view_impl.h \
     src/view/view.h \
-    src/view/fit_width_view_impl.h
+    src/view/fit_width_view_impl.h \
+    src/page_toolbar.h
 
 win32:LIBS += \
     C:/projects/doctpl/build-doctpl-lib/src/debug/doctpl.dll

@@ -73,16 +73,17 @@ public:
     enum class Mode {FitPage, FitWidth};
 
     View(
-        doctpl::Layout* layout,
+        doctpl::Layout& layout,
         //Mode mode,
         QWidget* parent = nullptr);
 
     virtual ~View();
 
-    void adjustCurrentPage();
-    void adjustCurrentField();
-
     //Mode mode() const { return mode_; }
+
+    /// No signals emitted, adjust current object in view only
+    void setCurrentField(doctpl::Field* f);
+    void setCurrentPage(doctpl::Page* p);
 
     doctpl::Page* currentPage() const;
     doctpl::Field* currentField() const;
@@ -90,11 +91,17 @@ public:
     doctpl::Page* pageAt(const QPoint& pos);
     doctpl::Field* fieldAt(const QPoint& pos);
 
+    doctpl::Layout& layout();
+    const doctpl::Layout& layout() const;
+
 signals:
     void pageSelected(doctpl::Page*);
     void fieldSelected(doctpl::Field*);
 
 protected:
+    void adjustCurrentPage();
+    void adjustCurrentField();
+
     virtual void mouseDoubleClickEvent(QMouseEvent *event);
     virtual void wheelEvent(QWheelEvent *event);
     virtual void resizeEvent(QResizeEvent *event);
@@ -107,7 +114,7 @@ private:
     std::unique_ptr<ViewImpl> impl_;
     //Mode mode_;
 
-    doctpl::Layout* layout_;
+    doctpl::Layout& layout_;
 
     doctpl::Page* currentPage_;
     doctpl::Field* currentField_;

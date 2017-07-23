@@ -13,18 +13,15 @@
 namespace view {
 
 ViewImpl::ViewImpl(
-        Layout* layout,
-        View* view,
+        Layout& layout,
+        View& view,
         DefaultViewCallbacks viewCallbacks,
         LayoutObjectCallbacks objectCallbacks)
     : layout_(layout)
     , view_(view)
     , viewCallbacks_(std::move(viewCallbacks))
     , objectCallbacks_(std::move(objectCallbacks))
-{
-    ASSERT(layout_);
-    ASSERT(view_);
-}
+{}
 
 void ViewImpl::adjustCurrentField() {}
 

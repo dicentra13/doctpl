@@ -7,8 +7,8 @@ namespace view {
 class FitWidthViewImpl : public ViewImpl {
 public:
     FitWidthViewImpl(
-        Layout* layout,
-        View* view,
+        Layout& layout,
+        View& view,
         DefaultViewCallbacks viewCallbacks,
         LayoutObjectCallbacks objectCallbacks);
 

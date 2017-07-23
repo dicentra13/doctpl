@@ -15,7 +15,7 @@
 namespace view {
 
 View::View(
-        Layout* layout,
+        Layout& layout,
         //Mode mode,
         QWidget* parent)
     : QGraphicsView(parent)
@@ -26,7 +26,7 @@ View::View(
 {
     impl_.reset(new FitWidthViewImpl(
         layout_,
-        this,
+        *this,
         DefaultViewCallbacks {
             [this] (QWheelEvent* e) { QGraphicsView::wheelEvent(e); },
             [this] (QResizeEvent* e) { QGraphicsView::resizeEvent(e); },
@@ -56,11 +56,11 @@ View::View(
 
     defaultStylePtr->setBrush(QBrush(Qt::white), doctpl::BackgroundStyleRole::Page);
 
-    layout_->addView(this);
-    if (layout_->pagesCount() > 0) {
-        currentPage_ = layout_->page(0);
+    layout_.addView(this);
+    if (layout_.pagesCount() > 0) {
+        currentPage_ = layout_.page(0);
     }
-    layout_->setPageSeparator(4.0);
+    layout_.setPageSeparator(4.0);
 
     impl_->adjust();
 }
@@ -71,6 +71,33 @@ View::~View() = default;
 //    mode_ = mode;
 //    // TODO mode_->adjust(templateLayout_, this);
 //}
+
+const Layout& View::layout() const { return layout_; }
+Layout& View::layout() { return layout_; }
+
+void View::setCurrentField(doctpl::Field* f)
+{
+    if (currentField_) {
+        currentField_->setSelected(false);
+    }
+    currentField_ = f;
+    if (currentField_) {
+        currentField_->setSelected(true);
+        adjustCurrentField();
+    }
+}
+
+void View::setCurrentPage(doctpl::Page* p)
+{
+    if (currentPage_) {
+        currentPage_->setSelected(false);
+    }
+    currentPage_ = p;
+    if (currentPage_) {
+        currentPage_->setSelected(true);
+        adjustCurrentPage();
+    }
+}
 
 void View::adjustCurrentPage()
 {

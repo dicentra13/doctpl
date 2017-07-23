@@ -59,16 +59,16 @@ public:
 
 protected:
     ViewImpl(
-        Layout* layout,
-        View* view,
+        Layout& layout,
+        View& view,
         DefaultViewCallbacks viewCallbacks,
         LayoutObjectCallbacks objectCallbacks);
 
     void changeCurrentPage(doctpl::Page* page);
     void changeCurrentField(doctpl::Field* field);
 
-    Layout* layout_;
-    View* view_;
+    Layout& layout_;
+    View& view_;
 
     DefaultViewCallbacks viewCallbacks_;
     LayoutObjectCallbacks objectCallbacks_;
