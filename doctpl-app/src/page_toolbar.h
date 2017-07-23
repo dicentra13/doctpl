@@ -39,6 +39,7 @@ signals:
 
 public slots:
     void onCurrentDocumentChanged(view::View* view);
+    void onCurrentPageChanged();
 
 protected slots:
     void onCreate();
@@ -56,8 +57,6 @@ private:
     void updatePagesCount();
     void updateEditingActions();
     void updateNavigationActions();
-
-    void onCurrentPageChanged();
 
     QToolBar* toolBar_;
     QMenu* menu_;

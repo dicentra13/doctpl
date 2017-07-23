@@ -43,5 +43,12 @@ HEADERS += \
     src/view/fit_width_view_impl.h \
     src/page_toolbar.h
 
+TRANSLATIONS += \
+    interface_ru.ts \
+    interface_en.ts
+
+RESOURCES += \
+    doctpl-app.qrc
+
 win32:LIBS += \
     C:/projects/doctpl/build-doctpl-lib/src/debug/doctpl.dll

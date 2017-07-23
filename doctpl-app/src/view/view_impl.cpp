@@ -47,12 +47,12 @@ void ViewImpl::processDoubleClickEvent(QMouseEvent* event)
     viewCallbacks_.onDoubleClickEvent(event);
 }
 
-void ViewImpl::changeCurrentPage(doctpl::Page* page)
+void ViewImpl::onPageSelected(doctpl::Page* page)
 {
     objectCallbacks_.onPageSelection(page);
 }
 
-void ViewImpl::changeCurrentField(doctpl::Field* field)
+void ViewImpl::onFieldSelected(doctpl::Field* field)
 {
     objectCallbacks_.onFieldSelection(field);
 }

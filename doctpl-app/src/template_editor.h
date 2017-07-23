@@ -6,6 +6,8 @@
 
 #include <vector>
 
+class PageToolbar;
+
 class QTabWidget;
 class QMenu;
 class QAction;
@@ -44,4 +46,6 @@ private:
 
     std::vector<DoctplTemplatePtr> documents_;
     size_t currentDocumentIdx_;
+
+    PageToolbar* pageToolbar_;
 };

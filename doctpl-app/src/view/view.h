@@ -95,8 +95,8 @@ public:
     const doctpl::Layout& layout() const;
 
 signals:
-    void pageSelected(doctpl::Page*);
-    void fieldSelected(doctpl::Field*);
+    void currentPageChanged();
+    void currentFieldChanged();
 
 protected:
     void adjustCurrentPage();
@@ -107,8 +107,8 @@ protected:
     virtual void resizeEvent(QResizeEvent *event);
     virtual void scrollContentsBy(int dx, int dy);
 
-    void selectedPageChanged(doctpl::Page* p);
-    void selectedFieldChanged(doctpl::Field* f);
+    void onPageSelected(doctpl::Page* p);
+    void onFieldSelected(doctpl::Field* f);
 
 private:
     std::unique_ptr<ViewImpl> impl_;

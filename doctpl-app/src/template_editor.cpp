@@ -1,6 +1,7 @@
 #include "template_editor.h"
 
 #include "view/view.h"
+#include "page_toolbar.h"
 
 #include <doctpl/serialize.h>
 #include <doctpl/template.h>
@@ -17,6 +18,12 @@ TemplateEditor::TemplateEditor(QWidget* parent)
     view::View* v = new view::View(*documents_.front()->layout(), documentWidget_);
     documentWidget_->addTab(v, "9.xml");
     v->show();
+
+    pageToolbar_ = new PageToolbar(this);
+    connect(v, SIGNAL(currentPageChanged()), pageToolbar_, SLOT(onCurrentPageChanged()));
+    addToolBar(pageToolbar_->toolBar());
+
+    pageToolbar_->onCurrentDocumentChanged(v);
 }
 
 TemplateEditor::~TemplateEditor() = default;

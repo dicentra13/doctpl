@@ -19,7 +19,11 @@ FitWidthViewImpl::FitWidthViewImpl(
         View& view,
         DefaultViewCallbacks viewCallbacks,
         LayoutObjectCallbacks objectCallbacks)
-    : ViewImpl(layout, view, std::move(viewCallbacks), std::move(objectCallbacks))
+    : ViewImpl(
+        layout,
+        view,
+        std::move(viewCallbacks),
+        std::move(objectCallbacks))
 {}
 
 void FitWidthViewImpl::adjustCurrentField()
@@ -27,7 +31,7 @@ void FitWidthViewImpl::adjustCurrentField()
     auto currentField = view_.currentField();
     if (currentField) {
         if (currentField->page() != view_.currentPage()) {
-            changeCurrentPage(currentField->page());
+            onPageSelected(currentField->page());
         }
         view_.ensureVisible(currentField, 0, 0);
     }
@@ -105,7 +109,7 @@ void FitWidthViewImpl::processScrollByEvent(int dx, int dy)
         view_.viewport()->width() / 2,
         view_.viewport()->height() / 2));
     if (pAtCenter && pAtCenter != p) {
-        changeCurrentPage(pAtCenter);
+        onPageSelected(pAtCenter);
     }
 }
 
@@ -113,10 +117,10 @@ void FitWidthViewImpl::processDoubleClickEvent(QMouseEvent* event)
 {
     auto field = view_.fieldAt(event->pos());
     if (field && field != view_.currentField()) {
-        changeCurrentField(field);
+        onFieldSelected(field);
         adjustCurrentField();
     } else if (!field) {
-        changeCurrentField(nullptr);
+        onFieldSelected(nullptr);
     }
 }
 

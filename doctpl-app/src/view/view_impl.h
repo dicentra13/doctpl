@@ -64,8 +64,8 @@ protected:
         DefaultViewCallbacks viewCallbacks,
         LayoutObjectCallbacks objectCallbacks);
 
-    void changeCurrentPage(doctpl::Page* page);
-    void changeCurrentField(doctpl::Field* field);
+    void onPageSelected(doctpl::Page* page);
+    void onFieldSelected(doctpl::Field* field);
 
     Layout& layout_;
     View& view_;

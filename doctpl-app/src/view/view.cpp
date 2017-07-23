@@ -35,9 +35,9 @@ View::View(
         },
         LayoutObjectCallbacks{
             [this] (doctpl::Field* f)
-                { if (f != currentField_) selectedFieldChanged(f); },
+                { if (f != currentField_) onFieldSelected(f); },
             [this] (doctpl::Page* p)
-                { if (p != currentPage_) selectedPageChanged(p); }
+                { if (p != currentPage_) onPageSelected(p); }
         }));
 
     setBackgroundBrush(QBrush(QColor(Qt::gray)));
@@ -133,14 +133,20 @@ void View::scrollContentsBy(int dx, int dy)
     impl_->processScrollByEvent(dx, dy);
 }
 
-void View::selectedPageChanged(doctpl::Page* p)
+void View::onPageSelected(doctpl::Page* p)
 {
-    emit pageSelected(p);
+    if (p != currentPage_) {
+        currentPage_ = p;
+        emit currentPageChanged();
+    }
 }
 
-void View::selectedFieldChanged(doctpl::Field* f)
+void View::onFieldSelected(doctpl::Field* f)
 {
-    emit fieldSelected(f);
+    if (f != currentField_) {
+        currentField_ = f;
+        emit currentFieldChanged();
+    }
 }
 
 doctpl::Page* View::pageAt(const QPoint& pos)
