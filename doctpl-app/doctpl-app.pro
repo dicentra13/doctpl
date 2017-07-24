@@ -34,14 +34,16 @@ SOURCES += \
     src/view/view_impl.cpp \
     src/view/view.cpp \
     src/view/fit_width_view_impl.cpp \
-    src/page_toolbar.cpp
+    src/page_toolbar.cpp \
+    src/view/fit_page_view_impl.cpp
 
 HEADERS += \
     src/template_editor.h \
     src/view/view_impl.h \
     src/view/view.h \
     src/view/fit_width_view_impl.h \
-    src/page_toolbar.h
+    src/page_toolbar.h \
+    src/view/fit_page_view_impl.h
 
 TRANSLATIONS += \
     interface_ru.ts \

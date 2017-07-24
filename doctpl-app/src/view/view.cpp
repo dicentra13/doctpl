@@ -1,6 +1,7 @@
 #include "view/view.h"
 
 #include "view/fit_width_view_impl.h"
+#include "view/fit_page_view_impl.h"
 
 #include <doctpl/field.h>
 #include <doctpl/page.h>
@@ -24,7 +25,7 @@ View::View(
     , currentPage_(nullptr)
     , currentField_(nullptr)
 {
-    impl_.reset(new FitWidthViewImpl(
+    impl_.reset(new FitPageViewImpl(
         layout_,
         *this,
         DefaultViewCallbacks {

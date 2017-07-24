@@ -101,7 +101,15 @@ void PageToolbar::onCurrentDocumentChanged(view::View* v)
 
     selector_->setEnabled(currentView_);
     if (currentView_) {
-        validator_->setTop(currentView_->layout().pagesCount());
+        const auto pagesCount = currentView_->layout().pagesCount();
+        validator_->setTop(pagesCount);
+
+        QString s;
+        s.setNum(pagesCount);
+        selector_->setText(s);
+        selector_->setFixedWidth(selector_->width());
+        selector_->clear();
+
         updateSelectorValue();
     }
     updatePagesCount();
