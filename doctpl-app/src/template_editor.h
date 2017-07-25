@@ -42,9 +42,9 @@ private:
     
     QTabWidget* documentWidget_;
 
-    using DoctplTemplatePtr = std::unique_ptr<doctpl::Template>;
+    using TemplatePtr = std::shared_ptr<doctpl::Template>;
 
-    std::vector<DoctplTemplatePtr> documents_;
+    std::vector<TemplatePtr> documents_;
     size_t currentDocumentIdx_;
 
     PageToolbar* pageToolbar_;

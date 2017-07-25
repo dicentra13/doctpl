@@ -15,7 +15,7 @@ TemplateEditor::TemplateEditor(QWidget* parent)
 
     documents_.push_back(doctpl::xml::read("C:/Users/dicentra/Documents/att_2017/9.xml"));
     // FIXME return Layout& from Template
-    view::View* v = new view::View(*documents_.front()->layout(), documentWidget_);
+    view::View* v = new view::View(documents_.front(), documentWidget_);
     documentWidget_->addTab(v, "9.xml");
     v->show();
 

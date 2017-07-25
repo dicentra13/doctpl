@@ -8,6 +8,7 @@
 
 namespace doctpl {
 
+class Template;
 class Layout;
 class Page;
 class Field;
@@ -72,8 +73,10 @@ class View : public QGraphicsView {
 public:
     enum class Mode {FitPage, FitWidth};
 
+    using TemplatePtr = std::shared_ptr<doctpl::Template>;
+
     View(
-        doctpl::Layout& layout,
+        TemplatePtr document,
         //Mode mode,
         QWidget* parent = nullptr);
 
@@ -114,6 +117,7 @@ private:
     std::unique_ptr<ViewImpl> impl_;
     //Mode mode_;
 
+    TemplatePtr document_; // force doc lifetime lasts while view exists
     doctpl::Layout& layout_;
 
     doctpl::Page* currentPage_;

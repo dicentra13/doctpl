@@ -71,22 +71,37 @@ void FitPageViewImpl::processResizeEvent(QResizeEvent* /*event*/)
 
 void FitPageViewImpl::processScrollByEvent(int dx, int dy)
 {
-    if (!view_.currentPage()
-        || view_.layout().pagesCount() == 0
-        || isInducedScrolling_)
+    const auto pagesCount = view_.layout().pagesCount();
+
+    if (!view_.currentPage() || pagesCount == 0 || isInducedScrolling_)
     {
         ViewImpl::processScrollByEvent(dx, dy);
         return;
     }
 
-//    auto vScrollbarPtr = view_.verticalScrollBar();
-//    const int pageStep = (vScrollbarPtr->maximum() - vScrollbarPtr->minimum()) /
-//        view_.layout().pagesCount();
+    auto vScrollbarPtr = view_.verticalScrollBar();
+    const auto val = vScrollbarPtr->value();
+    const auto min = vScrollbarPtr->minimum();
+    const auto max = vScrollbarPtr->maximum();
 
-//    if (dy > 0 && dy > pageStep / 3) {
+    doctpl::Layout::Index pageIdx;
+    if (val == min) {
+        pageIdx = 0;
+    } else if (val == max) {
+        pageIdx = pagesCount - 1;
+    } else {
+        const auto pageStep = vScrollbarPtr->pageStep();
+        if (pageStep == 0) {
+            return;
+        }
+        pageIdx = (val - min) / pageStep;
+    }
 
-//    } else if ()
-
+    auto pagePtr = view_.layout().page(pageIdx);
+    if (pagePtr != view_.currentPage()) {
+        onPageSelected(pagePtr);
+        adjustCurrentPage();
+    }
 }
 
 void FitPageViewImpl::processDoubleClickEvent(QMouseEvent* event)

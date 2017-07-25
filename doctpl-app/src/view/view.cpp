@@ -5,6 +5,7 @@
 
 #include <doctpl/field.h>
 #include <doctpl/page.h>
+#include <doctpl/template.h>
 #include <doctpl/layout.h>
 #include <doctpl/style_options.h>
 
@@ -16,12 +17,13 @@
 namespace view {
 
 View::View(
-        Layout& layout,
+        TemplatePtr document,
         //Mode mode,
         QWidget* parent)
     : QGraphicsView(parent)
     //, mode_(mode)
-    , layout_(layout)
+    , document_(document)
+    , layout_(*document_->layout())
     , currentPage_(nullptr)
     , currentField_(nullptr)
 {
@@ -66,7 +68,10 @@ View::View(
     impl_->adjust();
 }
 
-View::~View() = default;
+View::~View()
+{
+    setScene(nullptr); // FIXME howto better
+}
 
 //void View::setMode(View::Mode mode) {
 //    mode_ = mode;
