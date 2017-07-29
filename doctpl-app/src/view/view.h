@@ -77,12 +77,19 @@ public:
 
     View(
         TemplatePtr document,
-        //Mode mode,
+        Mode mode,
         QWidget* parent = nullptr);
+
+    View(const View&) = delete;
+    View& operator = (const View&) = delete;
+
+    View(View&&) = default;
+    View& operator = (View&&) = default;
 
     virtual ~View();
 
-    //Mode mode() const { return mode_; }
+    Mode mode() const { return currentMode_; }
+    void setMode(Mode mode);
 
     /// No signals emitted, adjust current object in view only
     void setCurrentField(doctpl::Field* f);
@@ -114,8 +121,14 @@ protected:
     void onFieldSelected(doctpl::Field* f);
 
 private:
-    std::unique_ptr<ViewImpl> impl_;
-    //Mode mode_;
+    void initModes();
+    void onModeChanged();
+
+    using ImplMap = std::map<Mode, std::unique_ptr<ViewImpl>>;
+
+    ImplMap modesImplMap_;
+    ViewImpl* currentModeImpl_;
+    Mode currentMode_;
 
     TemplatePtr document_; // force doc lifetime lasts while view exists
     doctpl::Layout* layout_;

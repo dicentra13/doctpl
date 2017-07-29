@@ -18,30 +18,16 @@ namespace view {
 
 View::View(
         TemplatePtr document,
-        //Mode mode,
+        Mode mode,
         QWidget* parent)
     : QGraphicsView(parent)
-    //, mode_(mode)
+    , currentMode_(mode)
     , document_(document)
     , layout_(document_->layout())
     , currentPage_(nullptr)
     , currentField_(nullptr)
 {
-    impl_.reset(new FitPageViewImpl(
-        *layout_,
-        *this,
-        DefaultViewCallbacks {
-            [this] (QWheelEvent* e) { QGraphicsView::wheelEvent(e); },
-            [this] (QResizeEvent* e) { QGraphicsView::resizeEvent(e); },
-            [this] (int dx, int dy) { QGraphicsView::scrollContentsBy(dx, dy); },
-            [this] (QMouseEvent* e) { QGraphicsView::mouseDoubleClickEvent(e); }
-        },
-        LayoutObjectCallbacks{
-            [this] (doctpl::Field* f)
-                { if (f != currentField_) onFieldSelected(f); },
-            [this] (doctpl::Page* p)
-                { if (p != currentPage_) onPageSelected(p); }
-        }));
+    initModes();
 
     setBackgroundBrush(QBrush(QColor(Qt::gray)));
 
@@ -65,7 +51,7 @@ View::View(
     }
     layout_->setPageSeparator(4.0);
 
-    impl_->adjust();
+    onModeChanged();
 }
 
 View::~View()
@@ -73,13 +59,59 @@ View::~View()
     layout_ = nullptr;
 }
 
-//void View::setMode(View::Mode mode) {
-//    mode_ = mode;
-//    // TODO mode_->adjust(templateLayout_, this);
-//}
+void View::initModes()
+{
+    DefaultViewCallbacks dvc{
+        [this] (QWheelEvent* e) { QGraphicsView::wheelEvent(e); },
+        [this] (QResizeEvent* e) { QGraphicsView::resizeEvent(e); },
+        [this] (int dx, int dy) { QGraphicsView::scrollContentsBy(dx, dy); },
+        [this] (QMouseEvent* e) { QGraphicsView::mouseDoubleClickEvent(e); }
+    };
+    LayoutObjectCallbacks dloc{
+        [this] (doctpl::Field* f)
+            { if (f != currentField_) onFieldSelected(f); },
+        [this] (doctpl::Page* p)
+            { if (p != currentPage_) onPageSelected(p); }
+    };
 
-const Layout& View::layout() const { ASSERT(layout_); return *layout_; }
-Layout& View::layout() { ASSERT(layout_); return *layout_; }
+    using ImplPtr = std::unique_ptr<ViewImpl>;
+    {
+        ImplPtr p(new FitPageViewImpl(*layout_, *this, dvc, dloc));
+        modesImplMap_.emplace(Mode::FitPage, std::move(p));
+    }
+    {
+        ImplPtr p(new FitWidthViewImpl(*layout_, *this, dvc, dloc));
+        modesImplMap_.emplace(Mode::FitWidth, std::move(p));
+    }
+}
+
+void View::setMode(View::Mode mode)
+{
+    if (mode == currentMode_) {
+        return;
+    }
+
+    currentMode_ = mode;
+    onModeChanged();
+}
+
+void View::onModeChanged()
+{
+    currentModeImpl_ = modesImplMap_.at(currentMode_).get();
+    currentModeImpl_->adjust();
+}
+
+const Layout& View::layout() const
+{
+    ASSERT(layout_);
+    return *layout_;
+}
+
+Layout& View::layout()
+{
+    ASSERT(layout_);
+    return *layout_;
+}
 
 #define DOCTPL_APP_VIEW_LAYOUT_GUARD \
     while (!layout_) { return; }
@@ -119,7 +151,7 @@ void View::setCurrentPage(doctpl::Page* p)
 void View::adjustCurrentPage()
 {
     DOCTPL_APP_VIEW_LAYOUT_GUARD
-    impl_->adjustCurrentPage();
+    currentModeImpl_->adjustCurrentPage();
 }
 
 doctpl::Page* View::currentPage() const
@@ -131,7 +163,7 @@ doctpl::Page* View::currentPage() const
 void View::adjustCurrentField()
 {
     DOCTPL_APP_VIEW_LAYOUT_GUARD
-    impl_->adjustCurrentField();
+    currentModeImpl_->adjustCurrentField();
 }
 
 doctpl::Field* View::currentField() const
@@ -143,25 +175,25 @@ doctpl::Field* View::currentField() const
 void View::mouseDoubleClickEvent(QMouseEvent* event)
 {
     DOCTPL_APP_VIEW_LAYOUT_GUARD
-    impl_->processDoubleClickEvent(event);
+    currentModeImpl_->processDoubleClickEvent(event);
 }
 
 void View::wheelEvent(QWheelEvent* event)
 {
     DOCTPL_APP_VIEW_LAYOUT_GUARD
-    impl_->processWheelEvent(event);
+    currentModeImpl_->processWheelEvent(event);
 }
 
 void View::resizeEvent(QResizeEvent* event)
 {
     DOCTPL_APP_VIEW_LAYOUT_GUARD
-    impl_->processResizeEvent(event);
+    currentModeImpl_->processResizeEvent(event);
 }
 
 void View::scrollContentsBy(int dx, int dy)
 {
     DOCTPL_APP_VIEW_LAYOUT_GUARD
-    impl_->processScrollByEvent(dx, dy);
+    currentModeImpl_->processScrollByEvent(dx, dy);
 }
 
 void View::onPageSelected(doctpl::Page* p)
