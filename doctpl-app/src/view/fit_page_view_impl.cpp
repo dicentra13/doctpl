@@ -119,8 +119,9 @@ void FitPageViewImpl::adjust()
 {
     view_.setDragMode(QGraphicsView::NoDrag);
     view_.setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view_.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    view_.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view_.horizontalScrollBar()->hide();
+    view_.verticalScrollBar()->hide();
 
     view_.currentField()
         ? adjustCurrentField()

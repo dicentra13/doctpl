@@ -54,3 +54,6 @@ RESOURCES += \
 
 win32:LIBS += \
     C:/projects/doctpl/build-doctpl-lib/src/debug/doctpl.dll
+
+DISTFILES += \
+    todo.txt
