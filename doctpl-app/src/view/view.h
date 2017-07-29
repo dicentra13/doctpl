@@ -118,7 +118,7 @@ private:
     //Mode mode_;
 
     TemplatePtr document_; // force doc lifetime lasts while view exists
-    doctpl::Layout& layout_;
+    doctpl::Layout* layout_;
 
     doctpl::Page* currentPage_;
     doctpl::Field* currentField_;
