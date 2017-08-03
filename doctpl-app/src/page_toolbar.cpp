@@ -196,6 +196,11 @@ void PageToolbar::onCreate()
     }
 */}
 
+/*
+ * page creation/deletion may affect available field actions
+ */
+
+
 void PageToolbar::onEdit()
 {
 /*    PageSettingsDialog *pd = new PageSettingsDialog(this,

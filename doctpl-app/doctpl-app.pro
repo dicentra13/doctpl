@@ -35,7 +35,10 @@ SOURCES += \
     src/view/view.cpp \
     src/view/fit_width_view_impl.cpp \
     src/page_toolbar.cpp \
-    src/view/fit_page_view_impl.cpp
+    src/view/fit_page_view_impl.cpp \
+    src/page_dialog.cpp \
+    src/edit_widgets.cpp \
+    src/settings.cpp
 
 HEADERS += \
     src/template_editor.h \
@@ -43,7 +46,10 @@ HEADERS += \
     src/view/view.h \
     src/view/fit_width_view_impl.h \
     src/page_toolbar.h \
-    src/view/fit_page_view_impl.h
+    src/view/fit_page_view_impl.h \
+    src/page_dialog.h \
+    src/edit_widgets.h \
+    src/settings.h
 
 TRANSLATIONS += \
     interface_ru.ts \

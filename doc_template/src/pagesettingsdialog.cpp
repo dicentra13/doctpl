@@ -11,7 +11,7 @@
 #include <QIntValidator>
 #include <QMessageBox>
 
-PageSettingsDialog::PageSettingsDialog(QWidget *parent, Mode mode)
+PageDialog::PageDialog(QWidget *parent, Mode mode)
     : QDialog(parent)
 {
     pageNumber_ = new QComboBox(this);
@@ -47,7 +47,7 @@ PageSettingsDialog::PageSettingsDialog(QWidget *parent, Mode mode)
     generateLayout();
 }
 
-void PageSettingsDialog::generateLayout() {
+void PageDialog::generateLayout() {
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     setLayout(layout);
@@ -85,7 +85,7 @@ void PageSettingsDialog::generateLayout() {
     setFixedSize(minimumWidth(), minimumHeight());
 }
 
-void PageSettingsDialog::setPages(size_t count) {
+void PageDialog::setPages(size_t count) {
 
     while (pageNumber_->count() > 0)
         pageNumber_->removeItem(0);
@@ -96,66 +96,66 @@ void PageSettingsDialog::setPages(size_t count) {
     }
 }
 
-size_t PageSettingsDialog::pageNum() const {
+size_t PageDialog::pageNum() const {
 
     return (size_t) pageNumber_->currentText().toInt();
 }
 
-void PageSettingsDialog::setPageNum(size_t num) {
+void PageDialog::setPageNum(size_t num) {
 
     if (1 <= num && num <= (size_t) pageNumber_->count())
         pageNumber_->setCurrentIndex(num - 1);
 }
 
-double PageSettingsDialog::width() const {
+double PageDialog::width() const {
 
     return (double) width_->text().toInt();
 }
 
-void PageSettingsDialog::setWidth(double width) {
+void PageDialog::setWidth(double width) {
 
     QString s;
     s.setNum((int) width);
     width_->setText(s);
 }
 
-double PageSettingsDialog::height() const {
+double PageDialog::height() const {
 
     return (double) height_->text().toInt();
 }
 
-void PageSettingsDialog::setHeight(double height) {
+void PageDialog::setHeight(double height) {
 
     QString s;
     s.setNum((int) height);
     height_->setText(s);
 }
 
-double PageSettingsDialog::dx() const {
+double PageDialog::dx() const {
 
     return (double) dx_->text().toInt();
 }
 
-void PageSettingsDialog::setDx(double dx) {
+void PageDialog::setDx(double dx) {
 
     QString s;
     s.setNum((int) dx);
     dx_->setText(s);
 }
 
-double PageSettingsDialog::dy() const {
+double PageDialog::dy() const {
 
     return (double) dy_->text().toInt();
 }
 
-void PageSettingsDialog::setDy(double dy) {
+void PageDialog::setDy(double dy) {
 
     QString s;
     s.setNum((int) dy);
     dy_->setText(s);
 }
 
-void PageSettingsDialog::accept() {
+void PageDialog::accept() {
 
     bool result = true;
     if (width_->text().isEmpty()) {

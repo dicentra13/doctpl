@@ -156,8 +156,8 @@ void PageTools::currentPageChanged() {
 }
 
 void PageTools::newPage() {
-    PageSettingsDialog *pd = new PageSettingsDialog(parent_,
-        PageSettingsDialog::Create);
+    PageDialog *pd = new PageDialog(parent_,
+        PageDialog::Create);
     pd->setPages(currentDocument_->numberOfPages() + 1);
     bool result = (pd->exec() == QDialog::Accepted);
     if (result) {
@@ -173,8 +173,8 @@ void PageTools::newPage() {
 }
 
 void PageTools::editPage() {
-    PageSettingsDialog *pd = new PageSettingsDialog(parent_,
-        PageSettingsDialog::Edit);
+    PageDialog *pd = new PageDialog(parent_,
+        PageDialog::Edit);
     pd->setPages(currentDocument_->numberOfPages());
     Page *p = currentDocument_->layout()->page(currentDocument_->currentPage());
     pd->setPageNum(p->num());

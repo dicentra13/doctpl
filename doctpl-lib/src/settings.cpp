@@ -23,12 +23,4 @@ const QFontDatabase& Settings::fontDB() const { return *impl_->fontDB; }
 
 QFontDatabase::WritingSystem Settings::script() const { return impl_->script; }
 
-// singleton
-
-const Settings& settings()
-{
-    static Settings s_settings;
-    return s_settings;
-}
-
 } // namespace doctpl

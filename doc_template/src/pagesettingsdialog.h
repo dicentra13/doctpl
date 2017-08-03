@@ -10,7 +10,7 @@ class QComboBox;
 class QDialogButtonBox;
 //class Page;
 
-class PageSettingsDialog : public QDialog {
+class PageDialog : public QDialog {
 
     Q_OBJECT
 
@@ -18,8 +18,8 @@ public:
 
     enum Mode {Create, Edit};
 
-    PageSettingsDialog(QWidget *parent, Mode mode = Create);
-    virtual ~PageSettingsDialog() {};
+    PageDialog(QWidget *parent, Mode mode = Create);
+    virtual ~PageDialog() {};
     void setPages(size_t count);
     size_t pageNum() const;
     void setPageNum(size_t num);

@@ -5,6 +5,7 @@
 #include <QPointF>
 
 #include <memory>
+#include <map>
 
 namespace doctpl {
 
