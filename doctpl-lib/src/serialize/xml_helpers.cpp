@@ -95,7 +95,7 @@ QFont parseFont(const QDomElement& fontElement)
     QString style = getAttr<QString>(fontElement, "style");
     int pixelSize = getAttr<int>(fontElement, "size");
 
-    QFont font = settings().fontDB().font(family, style, pixelSize);
+    QFont font = Settings().fontDB().font(family, style, pixelSize);
     font.setPixelSize(pixelSize);
     //font.setPointSize(int(14 * 25.4 / 72.0));
     return font;

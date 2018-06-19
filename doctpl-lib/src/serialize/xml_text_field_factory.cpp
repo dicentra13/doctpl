@@ -26,7 +26,8 @@ Field* textFieldXMLFactory(const QDomElement& fieldElement, Page* page)
         fieldElement.columnNumber(),
         "Text field can have no more than one \"text\" child node");
 
-    TextField* f = new TextField(common.name, common.size, common.pos, fs, page);
+    TextField* f = new TextField(
+        common.name, common.size, common.pos, fs, defaultStyle(), page);
     if (!texts.empty()) {
         f->setText(texts.front());
     }

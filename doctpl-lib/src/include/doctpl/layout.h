@@ -10,6 +10,8 @@
 #include <set>
 #include <memory>
 
+class QGraphicsView;
+
 namespace doctpl {
 
 class Template;
@@ -19,7 +21,11 @@ class Layout : public QObject {
     Q_OBJECT
 
 public:
-    explicit Layout(Template* document);
+    enum class FieldSelectionPolicy;
+
+    explicit Layout(
+        Template* document,
+        FieldSelectionPolicy policy = FieldSelectionPolicy::Disable);
 
     virtual ~Layout();
 
@@ -29,17 +35,10 @@ public:
 
     Page* insert(
         Index at,
-        const QSizeF& size);
-
-    Page* insert(
-        Index at,
-        const QSizeF& size, double dx, double dy);
+        Page::InitData data);
 
     Page* append(
-        const QSizeF& size);
-
-    Page* append(
-        const QSizeF& size, double dx, double dy);
+        Page::InitData data);
 
     void move(Index from, Index to);
     void erase(Index at);
@@ -62,6 +61,16 @@ public:
 
     void print(const QString& filename) const;
     void print(const QString& filename, const std::set<Index>& pages) const;
+
+    // all views should be deleted prior to layout
+    void addView(QGraphicsView* view);
+
+    // item selection
+
+    enum class FieldSelectionPolicy {Disable, Single, Multiple};
+
+    FieldSelectionPolicy fieldSelectionPolicy() const;
+    void setFieldSelectionPolicy(FieldSelectionPolicy policy);
 
 private:
     class Impl;

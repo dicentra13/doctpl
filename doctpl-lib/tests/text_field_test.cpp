@@ -27,9 +27,9 @@ BOOST_AUTO_TEST_CASE(test_create_and_delete)
 {
     Template doc;
     Layout* l = doc.layout();
-    Page* p = l->append({100.0, 100.0});
+    Page* p = l->append({{100.0, 100.0}, defaultStyle()});
     TextField* f = new TextField(
-        "Field1", {10.0, 5.0}, {0.0, 0.0}, createFormatting(FORMAT_1), p);
+        "Field1", {10.0, 5.0}, {0.0, 0.0}, createFormatting(FORMAT_1), defaultStyle(), p);
     BOOST_CHECK(f->page() == p);
     BOOST_CHECK(f->fieldType() == "text");
     BOOST_CHECK(f->name() == "Field1");

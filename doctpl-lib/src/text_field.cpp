@@ -38,11 +38,13 @@ TextField::TextField(
         const QSizeF& size,
         const QPointF& pos,
         const FormattingSettingsPtr& formattingSettings,
+        StylePtr style,
         Page* page)
     : WatchedField<TextField>(
         name,
         size,
         pos,
+        std::move(style),
         page,
         {page->layout()->document()->fields()->as<TextField>()})
     , impl_(new Impl(size.width(), size.height(), formattingSettings, this))
@@ -73,7 +75,25 @@ void TextField::paint(
     const QStyleOptionGraphicsItem* /*option*/,
     QWidget* /*widget*/)
 {
-//    painter->save();
+    painter->save();
+
+    const Style& s = *style();
+
+    const QPen& pen = s.modifier() & StyleModifiers::ENABLE_FIELD_FRAME
+        ? s.pen(LineStyleRole::FieldFrame)
+        : QPen(Qt::NoPen);
+
+    const QBrush& brush = s.modifier() & StyleModifiers::ENABLE_FIELD_BACKGROUND
+        ? s.brush(BackgroundStyleRole::Field)
+        : QBrush(Qt::NoBrush);
+
+    painter->setPen(pen);
+    painter->setBackground(brush);
+    painter->drawRect(QRectF(QPointF(0.0, 0.0), QPointF(width(), height())));
+
+    painter->restore();
+
+    //    painter->save();
 ////    if (!Field::isFinalPrinting()) {
 //        QPen cur(painter->pen());
 //        cur.setWidth(0);

@@ -4,6 +4,7 @@
 #include <doctpl/exception.h>
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QPrinter>
 #include <QPainter>
 
@@ -16,8 +17,12 @@ class Layout::Impl {
 public:
     typedef Layout::Index I;
 
-    Impl(Template* doc, Layout* layout)
+    Impl(
+            Template* doc,
+            Layout::FieldSelectionPolicy policy,
+            Layout* layout)
         : document_(doc)
+        , fieldSelectionPolicy_(policy)
         , layout_(layout)
         , scene_(new QGraphicsScene)
         , pageSeparator_(0.0)
@@ -31,9 +36,9 @@ public:
     Template* document() const { return document_; }
 
     template <class... Args>
-    Page* insert(I at, Args... args)
+    Page* insert(I at, Args&&... args)
     {
-        std::unique_ptr<Page> page(new Page(args..., layout_));
+        std::unique_ptr<Page> page(new Page(std::forward<Args>(args)..., layout_));
 
         double y = at == 0
             ? 0.0
@@ -159,6 +164,18 @@ public:
         painter.end();
     }
 
+    void addView(QGraphicsView* view)
+    {
+        view->setScene(scene_.get());
+    }
+
+    Layout::FieldSelectionPolicy fieldSelectionPolicy() const { return fieldSelectionPolicy_; }
+
+    void setFieldSelectionPolicy(Layout::FieldSelectionPolicy policy)
+    {
+        fieldSelectionPolicy_ = policy;
+    }
+
 private:
     void movePages(I start, I end, double delta)
     {
@@ -204,6 +221,7 @@ private:
     }
 
     Template* document_;
+    Layout::FieldSelectionPolicy fieldSelectionPolicy_;
     Layout* layout_;
     std::unique_ptr<QGraphicsScene> scene_;
     std::vector<Page*> pages_;
@@ -213,8 +231,8 @@ private:
 
 // Layout
 
-Layout::Layout(Template* document)
-    : impl_(new Impl(document, this))
+Layout::Layout(Template* document, FieldSelectionPolicy policy)
+    : impl_(new Impl(document, policy, this))
 {}
 
 Layout::~Layout() {}
@@ -223,28 +241,15 @@ Template* Layout::document() const { return impl_->document(); }
 
 Page* Layout::insert(
     Index at,
-    const QSizeF& size)
+    Page::InitData data)
 {
     REQUIRE(at <= pagesCount(), "Page index " << at << " is out of range");
-    return impl_->insert(at, size);
+    return impl_->insert(at, std::move(data));
 }
 
-Page* Layout::insert(
-    Index at,
-    const QSizeF& size, double dx, double dy)
+Page* Layout::append(Page::InitData data)
 {
-    REQUIRE(at <= pagesCount(), "Page index " << at << " is out of range");
-    return impl_->insert(at, size, dx, dy);
-}
-
-Page* Layout::append(const QSizeF& size)
-{
-    return impl_->insert(pagesCount(), size);
-}
-
-Page* Layout::append(const QSizeF& size, double dx, double dy)
-{
-    return impl_->insert(pagesCount(), size, dx, dy);
+    return impl_->insert(pagesCount(), std::move(data));
 }
 
 void Layout::move(Index from, Index to)
@@ -318,6 +323,21 @@ void Layout::print(const QString& filename, const std::set<Index>& pages) const
         impl_->checkIndexIsValid(i);
     }
     impl_->print(filename, pages);
+}
+
+void Layout::addView(QGraphicsView* view)
+{
+    impl_->addView(view);
+}
+
+Layout::FieldSelectionPolicy Layout::fieldSelectionPolicy() const
+{
+    return impl_->fieldSelectionPolicy();
+}
+
+void Layout::setFieldSelectionPolicy(FieldSelectionPolicy policy)
+{
+    impl_->setFieldSelectionPolicy(policy);
 }
 
 } // namespace doctpl

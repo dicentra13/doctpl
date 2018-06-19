@@ -19,9 +19,27 @@ class Field;
 
 class Page : public LayoutItem {
 public:
-    Page(const QSizeF& size, Layout* layout);
+    struct Offset {
+        // TODO explicit
+        Offset(double dx = 0.0, double dy = 0.0) : dx(dx), dy(dy) {}
 
-    Page(const QSizeF& size, double dx, double dy, Layout* layout);
+        double dx;
+        double dy;
+    };
+
+    struct InitData {
+        InitData(const QSizeF& size, StylePtr style, const Offset& offset = Offset())
+            : size(size)
+            , style(std::move(style))
+            , offset(offset)
+        {}
+
+        QSizeF size;
+        StylePtr style;
+        Offset offset;
+    };
+
+    Page(InitData data, Layout* layout);
 
     virtual ~Page();
 
@@ -75,7 +93,7 @@ public:
     };
 
 protected:
-    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+    //virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
     class Impl;
 

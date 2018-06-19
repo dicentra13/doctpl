@@ -20,6 +20,4 @@ private:
     std::unique_ptr<Impl> impl_;
 };
 
-const Settings& settings();
-
 } // namespace doctpl

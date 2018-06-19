@@ -4,6 +4,7 @@ TableField tests
 - add text checks to checkField()
 
 Formatting tests
+- Formatting::add and remove hide from public interface
 
 Serialization tests
 

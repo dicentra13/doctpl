@@ -70,12 +70,17 @@ void parseField(Page* p, const QDomElement& fieldElement)
 void parsePage(Layout* layout, const QDomElement& pageElement)
 {
     Page* p = layout->append(
-        {
-            getAttr<double>(pageElement, "width"),
-            getAttr<double>(pageElement, "height")
-        },
-        getAttr<double>(pageElement, "dx"),
-        getAttr<double>(pageElement, "dy"));
+        Page::InitData {
+            {
+                getAttr<double>(pageElement, "width"),
+                getAttr<double>(pageElement, "height")
+            },
+            defaultStyle(),
+            Page::Offset {
+                getAttr<double>(pageElement, "dx"),
+                getAttr<double>(pageElement, "dy")
+            }
+        });
 
     QDomNodeList fields = pageElement.elementsByTagName("field");
     XML_REQUIRE(

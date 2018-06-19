@@ -37,8 +37,17 @@ public:
     void setName(const QString& name);
     const QString& name() const;
 
+    // selection
+    //void setSelected(bool isSelected);
+    //bool isSelected() const;
+
 protected:
-    Field(const QString &name, const QSizeF& size, const QPointF& pos, Page* page);
+    Field(
+        const QString& name,
+        const QSizeF& size,
+        const QPointF& pos,
+        StylePtr style,
+        Page* page);
 
     class Impl;
 
@@ -95,9 +104,10 @@ protected:
             const QString &name,
             const QSizeF& size,
             const QPointF& pos,
+            StylePtr style,
             Page* page,
             const std::list<WatcherPtr>& watchers)
-        : Field(name, size, pos, page)
+        : Field(name, size, pos, std::move(style), page)
     {
         for (const auto& w : watchers) {
             addWatcher(w);

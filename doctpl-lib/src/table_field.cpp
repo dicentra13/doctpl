@@ -34,11 +34,13 @@ TableField::TableField(
         size_t rows,
         size_t cols,
         const FormattingSettingsPtr& fs,
+        StylePtr style,
         Page* page)
     : WatchedField<TableField>(
         name,
         size,
         pos,
+        std::move(style),
         page,
         {page->layout()->document()->fields()->as<TableField>()})
     , impl_(new Impl(size.width(), size.height(), rows, cols, fs, this))
@@ -50,11 +52,13 @@ TableField::TableField(
         const std::vector<double>& rowHeight,
         const QPointF& pos,
         std::vector<FormattingSettingsPtr> columnFormatting,
+        StylePtr style,
         Page* page)
     : WatchedField<TableField>(
         name,
         QSizeF(sum(columnWidth), sum(rowHeight)),
         pos,
+        std::move(style),
         page,
         {page->layout()->document()->fields()->as<TableField>()})
     , impl_(new Impl(columnWidth, rowHeight, std::move(columnFormatting), this))

@@ -17,6 +17,7 @@ public:
         size_t rows,
         size_t cols,
         const FormattingSettingsPtr& formattingSettings,
+        StylePtr style,
         Page* page);
 
     TableField(
@@ -25,6 +26,7 @@ public:
         const std::vector<double>& rowHeight,
         const QPointF& pos,
         std::vector<FormattingSettingsPtr> columnFormatting,
+        StylePtr style,
         Page* page);
 
     virtual ~TableField();
@@ -74,7 +76,7 @@ public:
 
     // text
 
-    void setText(size_t row, size_t column, const QString &text);
+    void setText(size_t row, size_t column, const QString& text);
     QString text(size_t row, size_t column) const;
 
 private:
